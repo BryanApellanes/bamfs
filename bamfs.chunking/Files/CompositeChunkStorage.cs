@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Bam.Net.CoreServices;
-using Bam.Net.CoreServices.Files;
-
-namespace Bam.Chunking
+﻿namespace Bam.Chunking
 {
     /// <summary>
     /// ChunkStorage composed of a single Primary IChunkStorage

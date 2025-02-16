@@ -2,13 +2,8 @@
 	This file was generated and should not be modified directly (handlebars template)
 */
 // Model is Table
-using System;
-using System.Collections.Generic;
+
 using System.Data;
-using System.Data.Common;
-using System.Linq;
-using System.Threading.Tasks;
-using Bam;
 using Bam.Data;
 using Bam.Data.Qi;
 

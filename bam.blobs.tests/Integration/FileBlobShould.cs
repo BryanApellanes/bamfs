@@ -1,4 +1,3 @@
-using Bam.Blobs;
 using Bam.Test;
 
 namespace Bam.Application.Unit;

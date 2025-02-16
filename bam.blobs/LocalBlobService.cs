@@ -1,5 +1,4 @@
 using Bam.Blobs;
-using Bam.Blobs.Data;
 using Bam.Blobs.Data.Local;
 using Bam.Blobs.Data.Local.Dao.Repository;
 using Bam.Net.CoreServices.Files;

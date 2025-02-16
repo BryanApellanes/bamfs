@@ -1,12 +1,4 @@
-﻿using Bam.Net.CoreServices.Files;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Bam.Data;
-using Bam.Data.Repositories;
+﻿using Bam.Data;
 using Bam.Logging;
 using Bam.Net.Services.Chunking;
 
@@ -21,11 +13,11 @@ namespace Bam.Chunking
     {
         public FileSystemChunkStorage()
         {
-            DataProvider = Data.Repositories.DataProvider.Current;
+            DataProvider = Data.DataSourceProvider.Current;
             Logger = Log.Default;
         }
 
-        public FileSystemChunkStorage(DataProvider dataProvider, ILogger logger = null)
+        public FileSystemChunkStorage(IDataDirectoryProvider dataProvider, ILogger logger = null)
         {
             DataProvider = dataProvider;
             Logger = logger;

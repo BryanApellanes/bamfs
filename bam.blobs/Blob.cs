@@ -1,5 +1,3 @@
-using Bam.Blobs;
-
 namespace Bam.Blobs;
 
 public abstract class Blob: IBlobHandle

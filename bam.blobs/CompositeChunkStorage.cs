@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Bam.Net.CoreServices;
-using Bam.Net.CoreServices.Files;
+﻿using Bam.Net.CoreServices.Files;
 
 namespace Bam.Blobs
 {

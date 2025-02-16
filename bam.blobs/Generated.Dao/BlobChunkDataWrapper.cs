@@ -1,16 +1,6 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Reflection;
-using System.Data;
-using System.Data.Common;
-using System.Linq;
-using Bam;
-using Bam.Data;
 using Bam.Data.Repositories;
 using Newtonsoft.Json;
-using Bam.Blobs.Data.Local;
-using Bam.Blobs.Data.Local.Dao;
 
 namespace Bam.Blobs.Data.Local.Wrappers
 {

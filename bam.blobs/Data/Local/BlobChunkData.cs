@@ -1,5 +1,4 @@
 ﻿using Bam.Data.Repositories;
-using Bam.Net.CoreServices.Files;
 
 namespace Bam.Blobs.Data.Local
 {

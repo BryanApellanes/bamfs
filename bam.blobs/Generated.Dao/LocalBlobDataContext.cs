@@ -2,12 +2,8 @@
 	This file was generated and should not be modified directly
 */
 // model is SchemaDefinition
-using System;
-using System.Data;
-using System.Data.Common;
-using Bam;
+
 using Bam.Data;
-using Bam.Data.Qi;
 
 namespace Bam.Blobs.Data.Local.Dao
 {

@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using Bam.Chunking;
+﻿using Bam.Chunking;
 
 namespace Bam.Net.CoreServices.Files
 {

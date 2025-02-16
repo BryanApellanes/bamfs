@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Bam.Chunking
+﻿namespace Bam.Chunking
 {
     /// <summary>
     /// An intermediate class used to describe the relationships

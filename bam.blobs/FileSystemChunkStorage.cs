@@ -1,5 +1,4 @@
 ﻿using Bam.Data;
-using Bam.Data.Repositories;
 using Bam.Logging;
 using Bam.Net.CoreServices.Files;
 

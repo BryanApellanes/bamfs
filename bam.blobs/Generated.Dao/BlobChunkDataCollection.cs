@@ -1,8 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Data;
-using System.Data.Common;
 using Bam.Data;
 
 namespace Bam.Blobs.Data.Local.Dao

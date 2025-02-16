@@ -1,10 +1,4 @@
-﻿using Bam.Net.CoreServices.Files;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Bam.Chunking;
+﻿using Bam.Chunking;
 
 namespace Bam.Net.Services.Chunking
 {
