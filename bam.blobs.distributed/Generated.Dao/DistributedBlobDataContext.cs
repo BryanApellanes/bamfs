@@ -5,7 +5,6 @@
 using System;
 using System.Data;
 using System.Data.Common;
-using Bam;
 using Bam.Data;
 using Bam.Data.Qi;
 

@@ -9,7 +9,6 @@ using System.Data;
 using System.Data.Common;
 using System.Linq;
 using System.Threading.Tasks;
-using Bam;
 using Bam.Data;
 using Bam.Data.Repositories;
 using Bam.Blobs.Data.Distributed;
