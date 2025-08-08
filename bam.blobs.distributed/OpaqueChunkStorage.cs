@@ -3,6 +3,7 @@ using System.Text;
 using Bam.Blobs;
 using Bam.Blobs.Data;
 using Bam.Blobs.Data.Local.Dao.Repository;
+using Bam.Encryption;
 using Bam.Net.CoreServices.Files;
 using Bam.Storage;
 
@@ -13,7 +14,7 @@ public class OpaqueChunkStorage : IChunkStorage
     public OpaqueChunkStorage(IHmacKeyProvider hmacKeyProvider, LocalBlobDataRepository? blobRepository = null)
     {
         this.HmacKeyProvider = hmacKeyProvider;
-        this.HMAC = new HMACSHA256(hmacKeyProvider.GetHmacKey());
+        this.HMAC = new HMACSHA256(hmacKeyProvider.GetNewHmacKey());
         this.BlobDataRepository = blobRepository ?? new LocalBlobDataRepository();
     }
     private HMAC HMAC { get; set; }

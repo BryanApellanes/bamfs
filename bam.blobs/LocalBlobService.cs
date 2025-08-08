@@ -7,13 +7,13 @@ namespace Bam.Files;
 
 public class LocalBlobService
 {
-    public LocalBlobService(FileSystemChunkStorage? fileSystemChunkStorage = null)
+    public LocalBlobService(DataDirectoryChunkStorage? fileSystemChunkStorage = null)
     {
         this.BlobRepository = new LocalBlobDataRepository();
-        this.FileSystemChunkStorage = fileSystemChunkStorage ?? new FileSystemChunkStorage();
+        this.DataDirectoryChunkStorage = fileSystemChunkStorage ?? new DataDirectoryChunkStorage();
     }
     protected LocalBlobDataRepository BlobRepository { get; init; }
-    protected FileSystemChunkStorage FileSystemChunkStorage { get; init; }
+    protected DataDirectoryChunkStorage DataDirectoryChunkStorage { get; init; }
 
     public async Task<BlobHandleData> SaveBlobAsync(Blob blobHandle)
     {
@@ -44,7 +44,7 @@ public class LocalBlobService
     {
         return Task.Run(IChunk () =>
         {
-            FileSystemChunkStorage.SetChunk(chunk);
+            DataDirectoryChunkStorage.SetChunk(chunk);
             return chunk;
         });
     }

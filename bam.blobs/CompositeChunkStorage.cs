@@ -10,7 +10,7 @@ namespace Bam.Blobs
     {
         public CompositeChunkStorage()
         {
-            Primary = new FileSystemChunkStorage();
+            Primary = new DataDirectoryChunkStorage();
             Secondary = new HashSet<IChunkStorage>();
         }
 
