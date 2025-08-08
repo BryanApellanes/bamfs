@@ -37,6 +37,7 @@
       <Compile Remove="IFileService.cs" />
       <Compile Remove="FileWriter.cs" />
       <Compile Remove="OpaqueChunkStorage.cs" />
+      <Compile Remove="IHmacKeyProvider.cs" />
     </ItemGroup>
 
     <ItemGroup>

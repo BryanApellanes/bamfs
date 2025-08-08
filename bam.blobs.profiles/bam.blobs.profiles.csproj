@@ -14,4 +14,8 @@
       <ProjectReference Include="..\..\bam.protocol\bam.protocol\bam.protocol.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Compile Remove="Data\Local\BlobProfileDelegatedKeySetData.cs" />
+    </ItemGroup>
+
 </Project>
