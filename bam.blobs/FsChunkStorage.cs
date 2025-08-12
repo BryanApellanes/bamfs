@@ -7,22 +7,22 @@ public class FsChunkStorage : IChunkStorage
 {
     public FsChunkStorage()
     {
-        this.Storage = new FsStorage();
+        this.ObjectStorage = new FsObjectStorage();
     }
 
-    private FsStorage Storage { get; init; }
+    private FsObjectStorage ObjectStorage { get; init; }
     
     public IChunk? GetChunk(string hash)
     {
         return new Chunk()
         {
             ChunkHash = hash,
-            Data = Storage.LoadHashHexString(hash).Value
+            Data = ObjectStorage.LoadHashHexString(hash).Value
         };
     }
 
     public void SetChunk(IChunk chunk)
     {
-        Storage.Save(chunk.Data);
+        ObjectStorage.Save(chunk.Data);
     }
 }
