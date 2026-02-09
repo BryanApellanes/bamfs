@@ -29,6 +29,7 @@
       <ProjectReference Include="..\..\bam.encryption\bam.encryption\bam.encryption.csproj" />
       <ProjectReference Include="..\..\bam.generators\bam.generators\bam.generators.csproj" />
       <ProjectReference Include="..\..\bam.logging\bam.logging\bam.logging.csproj" />
+      <ProjectReference Include="..\..\bam.storage\bam.storage\bam.storage.csproj" />
     </ItemGroup>
 
     <ItemGroup>
