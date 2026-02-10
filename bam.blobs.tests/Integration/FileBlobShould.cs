@@ -5,6 +5,9 @@ namespace Bam.Application.Unit;
 [UnitTestMenu("FileBlobs should")]
 public class FileBlobShould : UnitTestMenuContainer
 {
+    private static string TestFilePath(string fileName) =>
+        Path.Combine(AppContext.BaseDirectory, "TestFiles", fileName);
+
     [UnitTest]
     public void FileBlobShouldHaveNoTail()
     {
@@ -12,7 +15,7 @@ public class FileBlobShould : UnitTestMenuContainer
         long expectedChunkCount = 1;
 
         When.A<TestFileBlobHandle>("has no tail when file equals chunk size",
-            () => new TestFileBlobHandle("./TestFiles/256000"),
+            () => new TestFileBlobHandle(TestFilePath("256000")),
             (blobHandle) => new object[] { blobHandle.TailLengthAccessor, blobHandle.ChunkCount })
         .TheTest
         .ShouldPass(because =>
@@ -34,7 +37,7 @@ public class FileBlobShould : UnitTestMenuContainer
         long expectedChunkCount = 2;
 
         When.A<TestFileBlobHandle>("has a tail when file exceeds chunk size",
-            () => new TestFileBlobHandle("./TestFiles/275000"),
+            () => new TestFileBlobHandle(TestFilePath("275000")),
             (blobHandle) => new object[] { blobHandle.TailLengthAccessor, blobHandle.ChunkCount })
         .TheTest
         .ShouldPass(because =>
