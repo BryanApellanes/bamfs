@@ -8,20 +8,44 @@ public class FileBlobShould : UnitTestMenuContainer
     [UnitTest]
     public void FileBlobShouldHaveNoTail()
     {
-        TestFileBlobHandle blobHandle = new TestFileBlobHandle("./TestFiles/256000"); // default chunklength is 256000
         long expectedTailSize = 0;
         long expectedChunkCount = 1;
-        blobHandle.TailLengthAccessor.ShouldEqual(expectedTailSize);
-        blobHandle.ChunkCount.ShouldBeEqualTo(expectedChunkCount);
+
+        When.A<TestFileBlobHandle>("has no tail when file equals chunk size",
+            () => new TestFileBlobHandle("./TestFiles/256000"),
+            (blobHandle) => new object[] { blobHandle.TailLengthAccessor, blobHandle.ChunkCount })
+        .TheTest
+        .ShouldPass(because =>
+        {
+            object[] results = (object[])because.Result;
+            long tailSize = (long)results[0];
+            long chunkCount = (long)results[1];
+            because.ItsTrue("tail size equals expected", expectedTailSize == tailSize);
+            because.ItsTrue("chunk count equals expected", expectedChunkCount == chunkCount);
+        })
+        .SoBeHappy()
+        .UnlessItFailed();
     }
-    
+
     [UnitTest]
     public void FileBlobShouldHaveTail()
     {
-        TestFileBlobHandle blobHandle = new TestFileBlobHandle("./TestFiles/275000"); // default chunklength is 256000
         long expectedTailSize = 19000;
         long expectedChunkCount = 2;
-        blobHandle.TailLengthAccessor.ShouldEqual(expectedTailSize);
-        blobHandle.ChunkCount.ShouldBeEqualTo(expectedChunkCount);
+
+        When.A<TestFileBlobHandle>("has a tail when file exceeds chunk size",
+            () => new TestFileBlobHandle("./TestFiles/275000"),
+            (blobHandle) => new object[] { blobHandle.TailLengthAccessor, blobHandle.ChunkCount })
+        .TheTest
+        .ShouldPass(because =>
+        {
+            object[] results = (object[])because.Result;
+            long tailSize = (long)results[0];
+            long chunkCount = (long)results[1];
+            because.ItsTrue("tail size equals expected", expectedTailSize == tailSize);
+            because.ItsTrue("chunk count equals expected", expectedChunkCount == chunkCount);
+        })
+        .SoBeHappy()
+        .UnlessItFailed();
     }
 }
