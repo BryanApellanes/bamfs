@@ -16,7 +16,10 @@ namespace Bam.Blobs
 		public BlobChunk()
 		{
 		}
-        
+
+        /// <summary>
+        /// Gets or sets the SHA-256 hash of the blob this chunk belongs to.
+        /// </summary>
         public string BlobHash { get; set; }
         
         
@@ -49,6 +52,10 @@ namespace Bam.Blobs
         }
 
         byte[] _byteData;
+        /// <summary>
+        /// Gets or sets the raw byte data of this chunk. Setting this value
+        /// also updates <see cref="DataBase64"/> and recomputes the chunk hash.
+        /// </summary>
         public byte[] Data
         {
             get => _byteData;
@@ -60,6 +67,10 @@ namespace Bam.Blobs
             }
         }
 
+        /// <summary>
+        /// Converts this blob chunk into a <see cref="BlobChunkData"/> descriptor containing hash, index, and position metadata.
+        /// </summary>
+        /// <returns>A <see cref="BlobChunkData"/> representing the chunk metadata.</returns>
         public BlobChunkData ToChunkDataDescriptor()
         {
             return new BlobChunkData
@@ -71,6 +82,10 @@ namespace Bam.Blobs
             };
         }
 
+        /// <summary>
+        /// Converts this blob chunk into a <see cref="ChunkData"/> instance containing the hash and base64-encoded data.
+        /// </summary>
+        /// <returns>A <see cref="ChunkData"/> representing the chunk content.</returns>
         public ChunkData ToChunkData()
         {
             return new ChunkData

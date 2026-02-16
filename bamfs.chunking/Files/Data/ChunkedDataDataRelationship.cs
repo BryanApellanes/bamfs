@@ -33,6 +33,11 @@ namespace Bam.Chunking
         /// </summary>
         public long StreamIndex { get; set; }
 
+        /// <summary>
+        /// Retrieves the raw byte data for this chunk using the specified file service.
+        /// </summary>
+        /// <param name="fileService">The file service used to retrieve chunk data.</param>
+        /// <returns>The decoded byte data of the chunk.</returns>
         public byte[] GetData(IFileService fileService)
         {
             return fileService.GetChunkData(ChunkHash).Data.FromBase64();

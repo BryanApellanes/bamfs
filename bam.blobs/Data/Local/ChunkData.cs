@@ -21,6 +21,11 @@ namespace Bam.Blobs.Data
         /// </summary>
         public string Data { get; set; }
 
+        /// <summary>
+        /// Determines equality based on the <see cref="ChunkHash"/> value.
+        /// </summary>
+        /// <param name="obj">The object to compare with.</param>
+        /// <returns>True if the other object is a <see cref="ChunkData"/> with the same ChunkHash; otherwise, false.</returns>
         public override bool Equals(object obj)
         {
             if (obj is ChunkData data)
@@ -30,16 +35,26 @@ namespace Bam.Blobs.Data
             return false;
         }
 
+        /// <summary>
+        /// Converts this <see cref="ChunkData"/> to an <see cref="IChunk"/> by decoding the base64 data.
+        /// </summary>
+        /// <returns>An <see cref="IChunk"/> with the decoded data.</returns>
         public IChunk ToChunk()
         {
             return new Chunk { ChunkHash = ChunkHash, Data = Data.FromBase64() };
         }
 
+        /// <summary>
+        /// Creates a <see cref="ChunkData"/> from an <see cref="IChunk"/> by base64-encoding its data.
+        /// </summary>
+        /// <param name="chunk">The chunk to convert.</param>
+        /// <returns>A new <see cref="ChunkData"/> with the chunk's hash and base64-encoded data.</returns>
         public static ChunkData FromChunk(IChunk chunk)
         {
             return new ChunkData { ChunkHash = chunk.ChunkHash, Data = chunk.Data.ToBase64() };
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             return ChunkHash.GetHashCode();

@@ -16,6 +16,9 @@ namespace Bam.Chunking
 		{
 		}
         
+        /// <summary>
+        /// Gets or sets the SHA-256 hash of the file this chunk belongs to.
+        /// </summary>
         public string FileHash { get; set; }
 
         /// <summary>

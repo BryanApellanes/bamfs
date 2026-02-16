@@ -9,10 +9,19 @@ namespace Bam.Blobs
     /// </summary>
     public class FileBlob : Blob, IFileBlobHandle
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FileBlob"/> class from a file path.
+        /// </summary>
+        /// <param name="filePath">The path to the file.</param>
         public FileBlob(string filePath) : this(new FileInfo(filePath))
         {
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FileBlob"/> class from a <see cref="FileInfo"/>.
+        /// </summary>
+        /// <param name="file">The file to represent as a blob.</param>
+        /// <param name="chunkSize">The size, in bytes, of each chunk. Defaults to 256000.</param>
         public FileBlob(FileInfo file, int chunkSize = 256000)
         {
             Args.ThrowIfNull(file, "file");
@@ -28,6 +37,10 @@ namespace Bam.Blobs
             PartialTail = TailSize > 0;
         }
 
+        /// <summary>
+        /// Gets the blob properties including the file name and directory.
+        /// </summary>
+        /// <returns>An enumerable of <see cref="BlobProperty"/> instances for FileName and Directory.</returns>
         public override IEnumerable<BlobProperty> GetBlobProperties()
         {
             yield return new BlobProperty()
@@ -44,6 +57,9 @@ namespace Bam.Blobs
             };
         }
 
+        /// <summary>
+        /// Gets the name of the file.
+        /// </summary>
         public string? FileName { get; }
 
         /// <summary>
@@ -51,6 +67,9 @@ namespace Bam.Blobs
         /// </summary>
         public string? Directory { get; }
 
+        /// <summary>
+        /// Gets the total number of chunks, including a partial tail chunk if the file size is not evenly divisible by chunk size.
+        /// </summary>
         public override long ChunkCount
         {
             get
@@ -63,6 +82,11 @@ namespace Bam.Blobs
             }
         }
 
+        /// <summary>
+        /// Gets the <see cref="BlobChunk"/> at the specified index by reading the corresponding segment from the file.
+        /// </summary>
+        /// <param name="chunkIndex">The zero-based index of the chunk to retrieve.</param>
+        /// <returns>The <see cref="BlobChunk"/> at the specified index.</returns>
         public override BlobChunk this[long chunkIndex]
         {
             get
@@ -78,6 +102,12 @@ namespace Bam.Blobs
             }
         }
 
+        /// <summary>
+        /// Reads the chunk data at the specified index from the file.
+        /// </summary>
+        /// <param name="chunkIndex">The zero-based index of the chunk to read.</param>
+        /// <param name="streamIndex">When this method returns, contains the byte offset in the file where the chunk begins.</param>
+        /// <returns>A byte array containing the chunk data.</returns>
         public byte[] ReadChunk(long chunkIndex, out long streamIndex)
         {
             Args.ThrowIf<ArgumentOutOfRangeException>(chunkIndex < 0 || chunkIndex > (ChunkCount - 1), "ChunkIndex out of range: {0}", chunkIndex);

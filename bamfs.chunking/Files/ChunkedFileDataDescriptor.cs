@@ -6,7 +6,14 @@
     /// </summary>
     public class ChunkedFileDataDescriptor
     {
+        /// <summary>
+        /// Gets or sets the relationship descriptor linking the chunked data to its parent file.
+        /// </summary>
         public ChunkedDataDataRelationship ChunkedDataDataRelationship { get; set; }
+
+        /// <summary>
+        /// Gets or sets the chunk data containing the hash and base64-encoded content.
+        /// </summary>
         public ChunkData ChunkData { get; set; }
     }
 }

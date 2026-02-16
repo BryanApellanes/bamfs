@@ -5,8 +5,15 @@ using Bam.Net.CoreServices.Files;
 
 namespace Bam.Files;
 
+/// <summary>
+/// Provides local blob storage operations, persisting blob metadata to a local repository and chunk data to a data directory.
+/// </summary>
 public class LocalBlobService
 {
+    /// <summary>
+    /// Initializes a new instance of the <see cref="LocalBlobService"/> class.
+    /// </summary>
+    /// <param name="fileSystemChunkStorage">An optional data directory chunk storage instance. Uses a default instance if not provided.</param>
     public LocalBlobService(DataDirectoryChunkStorage? fileSystemChunkStorage = null)
     {
         this.BlobRepository = new LocalBlobDataRepository();
@@ -15,6 +22,11 @@ public class LocalBlobService
     protected LocalBlobDataRepository BlobRepository { get; init; }
     protected DataDirectoryChunkStorage DataDirectoryChunkStorage { get; init; }
 
+    /// <summary>
+    /// Saves a blob by persisting its handle, chunks, and properties asynchronously.
+    /// </summary>
+    /// <param name="blobHandle">The blob to save.</param>
+    /// <returns>The saved <see cref="BlobHandleData"/> containing the blob metadata.</returns>
     public async Task<BlobHandleData> SaveBlobAsync(Blob blobHandle)
     {
         BlobHandleData handle = await BlobRepository.SaveAsync(new BlobHandleData()
