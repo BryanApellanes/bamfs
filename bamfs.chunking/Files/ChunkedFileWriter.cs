@@ -21,7 +21,7 @@ namespace Bam.Chunking
         /// <summary>
         /// Gets or sets the file service used for chunk retrieval.
         /// </summary>
-        public IFileService FileService { get; set; }
+        public IFileService FileService { get; set; } = null!;
 
         /// <summary>
         /// Gets or sets the total number of chunks for this file.
@@ -36,7 +36,7 @@ namespace Bam.Chunking
         /// <summary>
         /// Gets or sets the SHA-256 hash of the file.
         /// </summary>
-        public string FileHash { get; set; }
+        public string FileHash { get; set; } = null!;
 
         /// <summary>
         /// Gets or sets the total length, in bytes, of the file.
@@ -46,17 +46,17 @@ namespace Bam.Chunking
         /// <summary>
         /// Gets or sets the original file name.
         /// </summary>
-        public string OriginalFileName { get; set; }
+        public string? OriginalFileName { get; set; }
 
         /// <summary>
         /// Gets or sets the original directory path of the file.
         /// </summary>
-        public string OriginalDirectory { get; set; }
+        public string? OriginalDirectory { get; set; }
 
         /// <summary>
         /// Gets or sets the logger instance.
         /// </summary>
-        public ILogger Logger { get; set; }
+        public ILogger Logger { get; set; } = null!;
 
         /// <summary>
         /// Creates a <see cref="ChunkedFileWriter"/> from the specified file hash using the given file service.
@@ -65,7 +65,7 @@ namespace Bam.Chunking
         /// <param name="fileHash">The SHA-256 hash of the file to write.</param>
         /// <param name="logger">An optional logger instance.</param>
         /// <returns>A new <see cref="ChunkedFileWriter"/> configured for the specified file.</returns>
-        public static ChunkedFileWriter FromFileHash(IFileService svc, string fileHash, ILogger logger = null)
+        public static ChunkedFileWriter FromFileHash(IFileService svc, string fileHash, ILogger logger = null!)
         {
             ChunkedDataDescriptor descriptor = svc.GetFileDescriptor(fileHash);
             ChunkedFileWriter writer = new ChunkedFileWriter(svc)

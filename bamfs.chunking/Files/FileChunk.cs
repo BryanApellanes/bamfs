@@ -19,12 +19,12 @@ namespace Bam.Chunking
         /// <summary>
         /// Gets or sets the SHA-256 hash of the file this chunk belongs to.
         /// </summary>
-        public string FileHash { get; set; }
+        public string FileHash { get; set; } = null!;
 
         /// <summary>
         /// Hash of this chunks ByteData
         /// </summary>
-        public string ChunkHash { get; set; }
+        public string ChunkHash { get; set; } = null!;
         
         /// <summary>
         /// The index of this chunk relative to
@@ -48,7 +48,7 @@ namespace Bam.Chunking
 			set;
 		}
 
-        string _data;
+        string _data = null!;
         /// <summary>
         /// The base 64 encoded data of this 
         /// chunk
@@ -67,7 +67,7 @@ namespace Bam.Chunking
             }
         }
 
-        byte[] _byteData;
+        byte[] _byteData = null!;
         protected internal byte[] ByteData
         {
             get

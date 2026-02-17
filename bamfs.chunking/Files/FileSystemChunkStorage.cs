@@ -14,10 +14,10 @@ namespace Bam.Chunking
         public FileSystemChunkStorage()
         {
             DataProvider = Data.DataSourceProvider.Current;
-            Logger = Log.Default;
+            Logger = Log.Default!;
         }
 
-        public FileSystemChunkStorage(IDataDirectoryProvider dataProvider, ILogger logger = null)
+        public FileSystemChunkStorage(IDataDirectoryProvider dataProvider, ILogger logger = null!)
         {
             DataProvider = dataProvider;
             Logger = logger;
@@ -40,7 +40,7 @@ namespace Bam.Chunking
             {
                 Task.Run(() => Logger.AddEntry("Chunk not found: {0}", LogEventType.Warning, chunkHash));
             }
-            return null;
+            return null!;
         }
 
         protected IChunk SetChunk(IChunk chunk, bool force)
@@ -51,7 +51,7 @@ namespace Bam.Chunking
             }
 
             FileInfo file = new FileInfo(GetChunkFilePath(chunk.Hash));
-            if (!file.Directory.Exists)
+            if (!file.Directory!.Exists)
             {
                 file.Directory.Create();
             }
@@ -65,7 +65,7 @@ namespace Bam.Chunking
             bool result = File.Exists(filePath);
             if (!result)
             {
-                chunk = null;
+                chunk = null!;
                 return result;
             }
 

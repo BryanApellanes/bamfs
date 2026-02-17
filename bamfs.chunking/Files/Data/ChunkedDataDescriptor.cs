@@ -11,7 +11,7 @@ namespace Bam.Chunking
         /// <summary>
         /// Gets or sets the SHA-256 hash of the original data.
         /// </summary>
-        public string DataHash { get; set; }
+        public string DataHash { get; set; } = null!;
 
         /// <summary>
         /// Gets or sets the original file name, or null if not applicable.
@@ -47,7 +47,7 @@ namespace Bam.Chunking
         /// </summary>
         /// <param name="obj">The object to compare with.</param>
         /// <returns>True if the other object is a <see cref="ChunkedDataDescriptor"/> with the same DataHash; otherwise, false.</returns>
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             if (obj is ChunkedDataDescriptor o)
             {

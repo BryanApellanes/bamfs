@@ -114,7 +114,7 @@ namespace Bam.Chunking
         /// </summary>
         /// <param name="description">An optional description of the file.</param>
         /// <returns>A <see cref="ChunkedDataDescriptor"/> representing the file's chunk metadata.</returns>
-        public ChunkedDataDescriptor ToChunkedFileDescriptor(string description = null)
+        public ChunkedDataDescriptor ToChunkedFileDescriptor(string? description = null)
         {
             return new ChunkedDataDescriptor
             {

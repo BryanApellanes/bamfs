@@ -18,14 +18,14 @@ namespace Bam.Net.CoreServices.Files
         List<FileChunk> GetFileChunks(string fileHash, int fromIndex, int batchSize);
         ChunkedDataDescriptor GetFileDescriptor(string fileHashOrName);
         ChunkedDataDescriptor GetFileDescriptorByFileHash(string fileHash);
-        IEnumerable<ChunkedDataDescriptor> GetFileDescriptorsByFileName(string fileName, string originalDirectory = null);
+        IEnumerable<ChunkedDataDescriptor> GetFileDescriptorsByFileName(string fileName, string? originalDirectory = null);
         ChunkedFileWriter GetFileWriter(string fileHash);
-        FileInfo RestoreFile(ChunkedDataDescriptor dataDescriptor, string localPath = null);
+        FileInfo RestoreFile(ChunkedDataDescriptor dataDescriptor, string? localPath = null);
         FileInfo RestoreFile(string fileHash, string localPath, bool overwrite = true);
         void SaveChunkData(ChunkData chunk);
         ChunkedDataDataRelationship SaveChunkDataDescriptor(ChunkedDataDataRelationship xref);
         ChunkedDataDescriptor SaveFileDescriptor(ChunkedDataDescriptor dataDescriptor);
-        ChunkedDataDescriptor StoreFileChunks(FileInfo file, string description = null);
+        ChunkedDataDescriptor StoreFileChunks(FileInfo file, string? description = null);
         void WriteFileHashToStream(string fileHash, Stream fs);
         FileInfo WriteFileDataToDirectory(string fileNameOrHash, string directoryPath);
         void WriteFileToStream(string fileNameOrHash, Stream stream);

@@ -61,7 +61,7 @@
                     return chunk;
                 }
             }
-            return null;
+            return null!;
         }
 
         /// <summary>

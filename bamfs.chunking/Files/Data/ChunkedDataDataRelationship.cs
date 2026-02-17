@@ -16,12 +16,12 @@ namespace Bam.Chunking
         /// The Sha256 hash of ChunkedData this
         /// chunk is related to.
         /// </summary>
-        public string DataHash { get; set; }
+        public string DataHash { get; set; } = null!;
         /// <summary>
         /// The Sha256 hash of this chunks
         /// byte[] data
         /// </summary>
-        public string ChunkHash { get; set; }
+        public string ChunkHash { get; set; } = null!;
         /// <summary>
         /// The index of this chunk relative to 
         /// all file chunks

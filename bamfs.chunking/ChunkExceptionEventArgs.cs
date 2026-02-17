@@ -8,6 +8,6 @@
         /// <summary>
         /// Gets or sets the hash of the chunk that caused the exception.
         /// </summary>
-        public string Hash { get; set; }
+        public string Hash { get; set; } = null!;
     }
 }
