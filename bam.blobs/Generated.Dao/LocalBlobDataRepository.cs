@@ -69,7 +69,7 @@ namespace Bam.Blobs.Data.Local.Dao.Repository
 		public Bam.Blobs.Data.Local.BlobChunkData GetOneBlobChunkDataWhere(WhereDelegate<BlobChunkDataColumns> where)
 		{
 			Type wrapperType = GetWrapperType<Bam.Blobs.Data.Local.BlobChunkData>();
-			return (Bam.Blobs.Data.Local.BlobChunkData)Bam.Blobs.Data.Local.Dao.BlobChunkData.GetOneWhere(where, Database)?.CopyAs(wrapperType, this);
+			return (Bam.Blobs.Data.Local.BlobChunkData)Bam.Blobs.Data.Local.Dao.BlobChunkData.GetOneWhere(where, Database)?.CopyAs(wrapperType, this)!;
 		}
 
 		/// <summary>
@@ -84,7 +84,7 @@ namespace Bam.Blobs.Data.Local.Dao.Repository
 		public Bam.Blobs.Data.Local.BlobChunkData OneBlobChunkDataWhere(WhereDelegate<BlobChunkDataColumns> where)
         {
             Type wrapperType = GetWrapperType<Bam.Blobs.Data.Local.BlobChunkData>();
-            return (Bam.Blobs.Data.Local.BlobChunkData)Bam.Blobs.Data.Local.Dao.BlobChunkData.OneWhere(where, Database)?.CopyAs(wrapperType, this);
+            return (Bam.Blobs.Data.Local.BlobChunkData)Bam.Blobs.Data.Local.Dao.BlobChunkData.OneWhere(where, Database)?.CopyAs(wrapperType, this)!;
         }
 
 		/// <summary>
@@ -94,7 +94,7 @@ namespace Bam.Blobs.Data.Local.Dao.Repository
 		/// and returns a IQueryFilter which is the result of any comparisons
 		/// between Bam.Blobs.Data.Local.BlobChunkDataColumns and other values
 		/// </param>
-		public IEnumerable<Bam.Blobs.Data.Local.BlobChunkData> BlobChunkDatasWhere(WhereDelegate<BlobChunkDataColumns> where, OrderBy<BlobChunkDataColumns> orderBy = null)
+		public IEnumerable<Bam.Blobs.Data.Local.BlobChunkData> BlobChunkDatasWhere(WhereDelegate<BlobChunkDataColumns> where, OrderBy<BlobChunkDataColumns> orderBy = null!)
         {
             return Wrap<Bam.Blobs.Data.Local.BlobChunkData>(Bam.Blobs.Data.Local.Dao.BlobChunkData.Where(where, orderBy, Database));
         }
@@ -189,7 +189,7 @@ namespace Bam.Blobs.Data.Local.Dao.Repository
 		public Bam.Blobs.Data.Local.BlobHandleData GetOneBlobHandleDataWhere(WhereDelegate<BlobHandleDataColumns> where)
 		{
 			Type wrapperType = GetWrapperType<Bam.Blobs.Data.Local.BlobHandleData>();
-			return (Bam.Blobs.Data.Local.BlobHandleData)Bam.Blobs.Data.Local.Dao.BlobHandleData.GetOneWhere(where, Database)?.CopyAs(wrapperType, this);
+			return (Bam.Blobs.Data.Local.BlobHandleData)Bam.Blobs.Data.Local.Dao.BlobHandleData.GetOneWhere(where, Database)?.CopyAs(wrapperType, this)!;
 		}
 
 		/// <summary>
@@ -204,7 +204,7 @@ namespace Bam.Blobs.Data.Local.Dao.Repository
 		public Bam.Blobs.Data.Local.BlobHandleData OneBlobHandleDataWhere(WhereDelegate<BlobHandleDataColumns> where)
         {
             Type wrapperType = GetWrapperType<Bam.Blobs.Data.Local.BlobHandleData>();
-            return (Bam.Blobs.Data.Local.BlobHandleData)Bam.Blobs.Data.Local.Dao.BlobHandleData.OneWhere(where, Database)?.CopyAs(wrapperType, this);
+            return (Bam.Blobs.Data.Local.BlobHandleData)Bam.Blobs.Data.Local.Dao.BlobHandleData.OneWhere(where, Database)?.CopyAs(wrapperType, this)!;
         }
 
 		/// <summary>
@@ -214,7 +214,7 @@ namespace Bam.Blobs.Data.Local.Dao.Repository
 		/// and returns a IQueryFilter which is the result of any comparisons
 		/// between Bam.Blobs.Data.Local.BlobHandleDataColumns and other values
 		/// </param>
-		public IEnumerable<Bam.Blobs.Data.Local.BlobHandleData> BlobHandleDatasWhere(WhereDelegate<BlobHandleDataColumns> where, OrderBy<BlobHandleDataColumns> orderBy = null)
+		public IEnumerable<Bam.Blobs.Data.Local.BlobHandleData> BlobHandleDatasWhere(WhereDelegate<BlobHandleDataColumns> where, OrderBy<BlobHandleDataColumns> orderBy = null!)
         {
             return Wrap<Bam.Blobs.Data.Local.BlobHandleData>(Bam.Blobs.Data.Local.Dao.BlobHandleData.Where(where, orderBy, Database));
         }
@@ -309,7 +309,7 @@ namespace Bam.Blobs.Data.Local.Dao.Repository
 		public Bam.Blobs.Data.Local.BlobPropertyData GetOneBlobPropertyDataWhere(WhereDelegate<BlobPropertyDataColumns> where)
 		{
 			Type wrapperType = GetWrapperType<Bam.Blobs.Data.Local.BlobPropertyData>();
-			return (Bam.Blobs.Data.Local.BlobPropertyData)Bam.Blobs.Data.Local.Dao.BlobPropertyData.GetOneWhere(where, Database)?.CopyAs(wrapperType, this);
+			return (Bam.Blobs.Data.Local.BlobPropertyData)Bam.Blobs.Data.Local.Dao.BlobPropertyData.GetOneWhere(where, Database)?.CopyAs(wrapperType, this)!;
 		}
 
 		/// <summary>
@@ -324,7 +324,7 @@ namespace Bam.Blobs.Data.Local.Dao.Repository
 		public Bam.Blobs.Data.Local.BlobPropertyData OneBlobPropertyDataWhere(WhereDelegate<BlobPropertyDataColumns> where)
         {
             Type wrapperType = GetWrapperType<Bam.Blobs.Data.Local.BlobPropertyData>();
-            return (Bam.Blobs.Data.Local.BlobPropertyData)Bam.Blobs.Data.Local.Dao.BlobPropertyData.OneWhere(where, Database)?.CopyAs(wrapperType, this);
+            return (Bam.Blobs.Data.Local.BlobPropertyData)Bam.Blobs.Data.Local.Dao.BlobPropertyData.OneWhere(where, Database)?.CopyAs(wrapperType, this)!;
         }
 
 		/// <summary>
@@ -334,7 +334,7 @@ namespace Bam.Blobs.Data.Local.Dao.Repository
 		/// and returns a IQueryFilter which is the result of any comparisons
 		/// between Bam.Blobs.Data.Local.BlobPropertyDataColumns and other values
 		/// </param>
-		public IEnumerable<Bam.Blobs.Data.Local.BlobPropertyData> BlobPropertyDatasWhere(WhereDelegate<BlobPropertyDataColumns> where, OrderBy<BlobPropertyDataColumns> orderBy = null)
+		public IEnumerable<Bam.Blobs.Data.Local.BlobPropertyData> BlobPropertyDatasWhere(WhereDelegate<BlobPropertyDataColumns> where, OrderBy<BlobPropertyDataColumns> orderBy = null!)
         {
             return Wrap<Bam.Blobs.Data.Local.BlobPropertyData>(Bam.Blobs.Data.Local.Dao.BlobPropertyData.Where(where, orderBy, Database));
         }

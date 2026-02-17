@@ -19,7 +19,7 @@ namespace Bam.Blobs.Data.Local.Wrappers
 		}
 
 		[JsonIgnore]
-		public DaoRepository DaoRepository { get; set; }
+		public DaoRepository DaoRepository { get; set; } = null!;
 
 		[JsonIgnore]
 		public Dictionary<string, PropertyInfo> UpdatedXrefCollectionProperties { get; set; }

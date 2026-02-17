@@ -8,6 +8,6 @@ namespace Bam.Blobs.Data.Local.Dao
 {
     public class BlobHandleDataPagedQuery: PagedQuery<BlobHandleDataColumns, BlobHandleData>
     { 
-		public BlobHandleDataPagedQuery(BlobHandleDataColumns orderByColumn,BlobHandleDataQuery query, Database db = null) : base(orderByColumn, query, db) { }
+		public BlobHandleDataPagedQuery(BlobHandleDataColumns orderByColumn,BlobHandleDataQuery query, Database db = null!) : base(orderByColumn, query, db) { }
     }
 }

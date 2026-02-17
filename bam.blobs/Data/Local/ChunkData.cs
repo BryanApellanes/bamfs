@@ -14,19 +14,19 @@ namespace Bam.Blobs.Data
         /// The Sha256 hash of the base 64 decoded
         /// value of this chunks Data
         /// </summary>
-        public string ChunkHash { get; set; }
+        public string ChunkHash { get; set; } = null!;
 
         /// <summary>
         /// Base64 encoded data.
         /// </summary>
-        public string Data { get; set; }
+        public string Data { get; set; } = null!;
 
         /// <summary>
         /// Determines equality based on the <see cref="ChunkHash"/> value.
         /// </summary>
         /// <param name="obj">The object to compare with.</param>
         /// <returns>True if the other object is a <see cref="ChunkData"/> with the same ChunkHash; otherwise, false.</returns>
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             if (obj is ChunkData data)
             {

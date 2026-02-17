@@ -14,12 +14,12 @@ namespace Bam.Blobs.Data.Local
         /// <summary>
         /// Gets or sets the Sha256 hash of the blob.
         /// </summary>
-        public string BlobHash { get; set; }
-        
+        public string BlobHash { get; set; } = null!;
+
         /// <summary>
         /// Gets or sets the Sha256 hash of the chunk.
         /// </summary>
-        public string ChunkHash { get; set; }
+        public string ChunkHash { get; set; } = null!;
         
         /// <summary>
         /// Gets or sets the index of the chunk in the blob.

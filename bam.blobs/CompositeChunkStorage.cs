@@ -49,21 +49,21 @@ namespace Bam.Blobs
         /// <returns>The chunk if found; otherwise, null.</returns>
         public IChunk GetChunk(string hash)
         {
-            IChunk chunk = Primary.GetChunk(hash);
+            IChunk chunk = Primary.GetChunk(hash)!;
             if(chunk != null)
             {
                 return chunk;
             }
             foreach (IChunkStorage storage in Secondary)
             {
-                chunk = storage.GetChunk(hash);
+                chunk = storage.GetChunk(hash)!;
                 if (chunk != null)
                 {
                     Task.Run(() => Primary.SetChunk(chunk));
                     return chunk;
                 }
             }
-            return null;
+            return null!;
         }
 
         /// <summary>

@@ -18,7 +18,7 @@ public abstract class Blob: IBlobHandle
     /// <summary>
     /// Gets the SHA-256 hash that uniquely identifies this blob.
     /// </summary>
-    public string BlobHash { get; protected init; }
+    public string BlobHash { get; protected init; } = null!;
 
     /// <summary>
     /// Gets the total length, in bytes, of the blob data.

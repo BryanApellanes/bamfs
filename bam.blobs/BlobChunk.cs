@@ -20,7 +20,7 @@ namespace Bam.Blobs
         /// <summary>
         /// Gets or sets the SHA-256 hash of the blob this chunk belongs to.
         /// </summary>
-        public string BlobHash { get; set; }
+        public string BlobHash { get; set; } = null!;
         
         
         /// <summary>
@@ -35,7 +35,7 @@ namespace Bam.Blobs
         /// </summary>
         public long BlobIndex { get; set; }
 
-        string _data;
+        string _data = null!;
         /// <summary>
         /// The base 64 encoded data of this 
         /// chunk
@@ -51,12 +51,12 @@ namespace Bam.Blobs
             }
         }
 
-        byte[] _byteData;
+        byte[] _byteData = null!;
         /// <summary>
         /// Gets or sets the raw byte data of this chunk. Setting this value
         /// also updates <see cref="DataBase64"/> and recomputes the chunk hash.
         /// </summary>
-        public byte[] Data
+        public new byte[] Data
         {
             get => _byteData;
             set

@@ -11,20 +11,26 @@ namespace Bam.Blobs.Data.Local
         /// <summary>
         /// Gets or sets the SHA-256 hash that uniquely identifies this blob.
         /// </summary>
-        public string BlobHash { get; set; }
+        public string BlobHash { get; set; } = null!;
 
         /// <summary>
         /// Determines equality based on the <see cref="BlobHash"/> value.
         /// </summary>
         /// <param name="obj">The object to compare with.</param>
         /// <returns>True if the other object is a <see cref="BlobHandleData"/> with the same BlobHash; otherwise, false.</returns>
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             if (obj is BlobHandleData o)
             {
                 return o.BlobHash.Equals(BlobHash);
             }
             return false;
+        }
+
+        /// <inheritdoc/>
+        public override int GetHashCode()
+        {
+            return BlobHash.GetHashCode();
         }
     }
 }

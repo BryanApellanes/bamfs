@@ -25,7 +25,7 @@ namespace Bam.Blobs
         /// </summary>
         /// <param name="dataProvider">The data directory provider.</param>
         /// <param name="logger">An optional logger instance.</param>
-        public RepositoryChunkStorage(IDataDirectoryProvider dataProvider, ILogger logger = null)
+        public RepositoryChunkStorage(IDataDirectoryProvider dataProvider, ILogger logger = null!)
         {
             DataProvider = dataProvider;
             Repository = new DefaultDaoRepository();
@@ -38,7 +38,7 @@ namespace Bam.Blobs
         /// <param name="repository">The data repository to store chunks in.</param>
         /// <param name="dataSettings">The data directory provider.</param>
         /// <param name="logger">An optional logger instance.</param>
-        public RepositoryChunkStorage(IRepository repository, IDataDirectoryProvider dataSettings, ILogger logger = null):this(dataSettings, logger)
+        public RepositoryChunkStorage(IRepository repository, IDataDirectoryProvider dataSettings, ILogger logger = null!):this(dataSettings, logger)
         {
             Repository = repository;
         }
@@ -46,12 +46,12 @@ namespace Bam.Blobs
         /// <summary>
         /// Gets or sets the data directory provider.
         /// </summary>
-        public IDataDirectoryProvider DataProvider { get; set; }
+        public IDataDirectoryProvider DataProvider { get; set; } = null!;
 
         /// <summary>
         /// Gets or sets the data repository used for chunk persistence.
         /// </summary>
-        public IRepository Repository { get; set; }
+        public IRepository Repository { get; set; } = null!;
 
         /// <summary>
         /// Retrieves a chunk from the repository by its hash.

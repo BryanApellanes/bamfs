@@ -27,7 +27,7 @@ namespace Bam.Blobs
         /// <summary>
         /// Gets or sets the raw byte data of this chunk.
         /// </summary>
-        public virtual byte[] Data { get; set; }
+        public virtual byte[] Data { get; set; } = null!;
     }
 
 }

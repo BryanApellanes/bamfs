@@ -62,9 +62,9 @@ namespace Bam.Blobs
             }
             else
             {
-                Task.Run(() => Logger.AddEntry("Chunk not found: {0}", LogEventType.Warning, chunkHash));
+                Task.Run(() => Logger!.AddEntry("Chunk not found: {0}", LogEventType.Warning, chunkHash));
             }
-            return null;
+            return null!;
         }
 
         protected IChunk SetChunk(IChunk chunk, bool force)
@@ -75,7 +75,7 @@ namespace Bam.Blobs
             }
 
             FileInfo file = new FileInfo(GetChunkFilePath(chunk.ChunkHash));
-            if (!file.Directory.Exists)
+            if (!file.Directory!.Exists)
             {
                 file.Directory.Create();
             }
@@ -89,7 +89,7 @@ namespace Bam.Blobs
             bool result = File.Exists(filePath);
             if (!result)
             {
-                chunk = null;
+                chunk = null!;
                 return result;
             }
 

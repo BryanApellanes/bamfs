@@ -8,6 +8,6 @@ namespace Bam.Blobs.Data.Local.Dao
 {
     public class BlobChunkDataPagedQuery: PagedQuery<BlobChunkDataColumns, BlobChunkData>
     { 
-		public BlobChunkDataPagedQuery(BlobChunkDataColumns orderByColumn,BlobChunkDataQuery query, Database db = null) : base(orderByColumn, query, db) { }
+		public BlobChunkDataPagedQuery(BlobChunkDataColumns orderByColumn,BlobChunkDataQuery query, Database db = null!) : base(orderByColumn, query, db) { }
     }
 }

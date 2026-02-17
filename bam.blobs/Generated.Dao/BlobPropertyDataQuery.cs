@@ -9,16 +9,16 @@ namespace Bam.Blobs.Data.Local.Dao
     public class BlobPropertyDataQuery: Query<BlobPropertyDataColumns, BlobPropertyData>
     { 
 		public BlobPropertyDataQuery(){}
-		public BlobPropertyDataQuery(WhereDelegate<BlobPropertyDataColumns> where, OrderBy<BlobPropertyDataColumns> orderBy = null, Database db = null) : base(where, orderBy, db) { }
-		public BlobPropertyDataQuery(Func<BlobPropertyDataColumns, QueryFilter<BlobPropertyDataColumns>> where, OrderBy<BlobPropertyDataColumns> orderBy = null, Database db = null) : base(where, orderBy, db) { }		
-		public BlobPropertyDataQuery(Delegate where, Database db = null) : base(where, db) { }
-		
+		public BlobPropertyDataQuery(WhereDelegate<BlobPropertyDataColumns> where, OrderBy<BlobPropertyDataColumns> orderBy = null!, Database db = null!) : base(where, orderBy, db) { }
+		public BlobPropertyDataQuery(Func<BlobPropertyDataColumns, QueryFilter<BlobPropertyDataColumns>> where, OrderBy<BlobPropertyDataColumns> orderBy = null!, Database db = null!) : base(where, orderBy, db) { }
+		public BlobPropertyDataQuery(Delegate where, Database db = null!) : base(where, db) { }
+
         public static BlobPropertyDataQuery Where(WhereDelegate<BlobPropertyDataColumns> where)
         {
-            return Where(where, null, null);
+            return Where(where, null!, null!);
         }
 
-        public static BlobPropertyDataQuery Where(WhereDelegate<BlobPropertyDataColumns> where, OrderBy<BlobPropertyDataColumns> orderBy = null, Database db = null)
+        public static BlobPropertyDataQuery Where(WhereDelegate<BlobPropertyDataColumns> where, OrderBy<BlobPropertyDataColumns> orderBy = null!, Database db = null!)
         {
             return new BlobPropertyDataQuery(where, orderBy, db);
         }
