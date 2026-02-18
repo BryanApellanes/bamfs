@@ -1,0 +1,6 @@
+﻿TypeAssembly: ~/.bam/build/Release/bam.blobs.distributed/net8.0/bam.blobs.distributed.dll
+SchemaName: DistributedBlobData
+FromNamespace: Bam.Blobs.Data.Distributed
+WriteSourceTo: ../Generated.Dao
+CheckForIds: true
+UseInheritanceSchema: false
