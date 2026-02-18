@@ -19,8 +19,8 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\bam.base\bam.base\bam.base.csproj" />
-      <ProjectReference Include="..\..\bam.data\bam.data\bam.data.csproj" />
+      <ProjectReference Include="$(BamFrameworkRoot)bam.base\bam.base\bam.base.csproj" />
+      <ProjectReference Include="$(BamFrameworkRoot)bam.data\bam.data\bam.data.csproj" />
       <ProjectReference Include="..\bam.blobs\bam.blobs.csproj" />
     </ItemGroup>
 

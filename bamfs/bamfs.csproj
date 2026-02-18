@@ -34,7 +34,7 @@
     <Compile Remove="SemanticAssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\bam.base\bam.base\bam.base.csproj" />
-    <ProjectReference Include="..\..\bam.console\bam.console\bam.console.csproj" />
+    <ProjectReference Include="$(BamFrameworkRoot)bam.base\bam.base\bam.base.csproj" />
+    <ProjectReference Include="$(BamFrameworkRoot)bam.console\bam.console\bam.console.csproj" />
   </ItemGroup>
 </Project>
