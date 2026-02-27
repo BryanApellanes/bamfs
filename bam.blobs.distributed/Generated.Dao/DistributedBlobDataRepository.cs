@@ -16,7 +16,7 @@ using Bam.Blobs.Data.Distributed;
 namespace Bam.Blobs.Data.Distributed.Dao.Repository
 {
 	[Serializable]
-	public partial class DistributedBlobDataRepository: DaoRepository
+	public partial class DistributedBlobDataRepository: AsyncDaoRepository
 	{
 		public DistributedBlobDataRepository()
 		{
