@@ -29,7 +29,7 @@
       <ProjectReference Include="$(BamFrameworkRoot)bam.encryption\bam.encryption\bam.encryption.csproj" />
       <ProjectReference Include="$(BamFrameworkRoot)bam.generators\bam.generators\bam.generators.csproj" />
       <ProjectReference Include="$(BamFrameworkRoot)bam.logging\bam.logging\bam.logging.csproj" />
-      <ProjectReference Include="..\..\bam.storage\bam.storage\bam.storage.csproj" />
+      <ProjectReference Include="..\..\bam.data.objects\bam.data.objects\bam.data.objects.csproj" />
     </ItemGroup>
 
     <ItemGroup>
