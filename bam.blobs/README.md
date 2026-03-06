@@ -6,7 +6,7 @@ Content-addressable blob storage with SHA-256-based chunking and multiple storag
 
 bam.blobs provides a content-addressable storage system for binary large objects (blobs). Files and arbitrary byte data are split into fixed-size chunks (default 256 KB), each identified by its SHA-256 hash. This deduplication-friendly design means identical chunks are stored only once regardless of how many blobs reference them.
 
-The project defines the core abstractions (`IChunk`, `IChunkStorage`, `IBlobHandle`) and provides several concrete storage implementations: file-system-based (`DataDirectoryChunkStorage`, `FileSystemChunkStorage`, `FsChunkStorage`), database-backed (`RepositoryChunkStorage`), and a composite strategy (`CompositeChunkStorage`) that layers primary and secondary storage providers with automatic cache promotion. A `LocalBlobService` orchestrates saving blobs by persisting both the chunk data and the blob-to-chunk relationship metadata via a generated DAO repository.
+The project defines the core abstractions (`IChunk`, `IChunkStorage`, `IBlobHandle`, `IBlobService`) and provides several concrete storage implementations: file-system-based (`DataDirectoryChunkStorage`, `FileSystemChunkStorage`, `FsChunkStorage`), database-backed (`RepositoryChunkStorage`), and a composite strategy (`CompositeChunkStorage`) that layers primary and secondary storage providers with automatic cache promotion. `BlobService` orchestrates saving and loading blobs by persisting both the chunk data and the blob-to-chunk relationship metadata via a generated DAO repository.
 
 The data layer consists of POCO types (`BlobHandleData`, `BlobChunkData`, `BlobPropertyData`, `ChunkData`) and their corresponding generated DAO classes under the `Generated.Dao` directory. The generated `LocalBlobDataRepository` provides typed query methods such as `OneBlobHandleDataWhere`, `BlobChunkDatasWhere`, and batch iteration.
 
@@ -14,12 +14,14 @@ The data layer consists of POCO types (`BlobHandleData`, `BlobChunkData`, `BlobP
 
 | Class | Description |
 |---|---|
+| `IBlobService` | Interface defining the contract for saving and loading blobs (`SaveBlobAsync`, `LoadBlobAsync`). |
+| `BlobService` | Implements `IBlobService`. Saves a `Blob` by persisting its handle, chunks, and properties; loads a blob from storage by hash, returning a `StoredBlob`. |
 | `Blob` | Abstract base class representing a blob with chunk count, chunk size, blob hash, and length. Provides an indexer to access individual `BlobChunk` instances. |
 | `FileBlob` | Concrete `Blob` that reads chunks directly from a local file. Handles tail chunks when file size is not evenly divisible by chunk size. |
+| `StoredBlob` | Concrete `Blob` loaded from storage. Lazy-loads chunk data from `IChunkStorage` on access via the indexer. |
 | `BlobChunk` | A chunk of a blob. Holds base64-encoded and raw byte data, auto-computes SHA-256 hash on set. Converts to DAO-friendly `BlobChunkData` and `ChunkData`. |
 | `Chunk` | Simple `IChunk` implementation holding byte data and a lazily computed SHA-256 hash. |
 | `BlobProperty` | Key-value metadata pair associated with a blob hash (e.g., FileName, Directory). |
-| `LocalBlobService` | Service that saves a `Blob` by persisting its handle, all chunks (to `DataDirectoryChunkStorage`), blob-chunk relationships, and properties to `LocalBlobDataRepository`. |
 | `DataDirectoryChunkStorage` | `IChunkStorage` that stores chunk bytes on the file system under a hash-derived directory tree (hash split into 2-character path segments). |
 | `FileSystemChunkStorage` | Functionally identical to `DataDirectoryChunkStorage`; file-system chunk storage using `IDataDirectoryProvider`. |
 | `FsChunkStorage` | `IChunkStorage` backed by `FsSlottedStorage` from bam.storage. |
@@ -60,17 +62,38 @@ The data layer consists of POCO types (`BlobHandleData`, `BlobChunkData`, `BlobP
 
 ```csharp
 using Bam.Blobs;
-using Bam.Files;
 
 // Create a FileBlob from a local file (default 256 KB chunks)
 FileBlob fileBlob = new FileBlob(@"C:\data\myfile.bin");
 
-// Use LocalBlobService to persist the blob
-LocalBlobService service = new LocalBlobService();
+// Use BlobService to persist the blob
+IBlobService service = new BlobService();
 BlobHandleData handle = await service.SaveBlobAsync(fileBlob);
 
 // The handle contains the SHA-256 hash of the entire file
 Console.WriteLine($"Blob hash: {handle.BlobHash}");
+```
+
+### Loading a blob from storage
+
+```csharp
+using Bam.Blobs;
+
+IBlobService service = new BlobService();
+
+// Load by hash
+Blob? blob = await service.LoadBlobAsync("abc123...");
+if (blob != null)
+{
+    Console.WriteLine($"Chunks: {blob.ChunkCount}, Length: {blob.Length}");
+
+    // Access chunks (lazy-loaded from chunk storage)
+    for (long i = 0; i < blob.ChunkCount; i++)
+    {
+        BlobChunk chunk = blob[i];
+        Console.WriteLine($"Chunk {i}: {chunk.Data.Length} bytes");
+    }
+}
 ```
 
 ### Reading chunks from a FileBlob
@@ -119,6 +142,5 @@ var chunks = repo.BlobChunkDatasWhere(c => c.BlobHash == "abc123...");
 ## Known Gaps / Not Yet Implemented
 
 - **`BlobWriter.WriteBlobToFile`** -- The method body is commented out. The class is a placeholder that does not yet support writing blobs back to the file system from stored chunks.
-- **`IBlobService`** -- The interface is declared but has no methods defined; it is an empty contract.
 - **`Handle`** -- Empty subclass of `DataHandle` with no additional behavior.
 - **Excluded source files** -- Several files are explicitly excluded from compilation in the .csproj: `FileService.cs`, `FileServiceSettings.cs`, `IFileService.cs`, `FileWriter.cs`, `OpaqueChunkStorage.cs`, `IHmacKeyProvider.cs`. These appear to be legacy or superseded types.
