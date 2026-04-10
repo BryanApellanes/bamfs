@@ -8,7 +8,7 @@ using Bam.Blobs.Data.Local;
 namespace Bam.Blobs
 {
     /// <summary>
-    /// A chunk or segment of a file
+    /// A chunk or segment of a blob
     /// </summary>
 	[Serializable]
 	public class BlobChunk: Chunk
