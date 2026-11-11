@@ -51,4 +51,72 @@ public class FileBlobShould : UnitTestMenuContainer
         .SoBeHappy()
         .UnlessItFailed();
     }
+
+    [UnitTest]
+    public void ReadWholeAndTailChunksExactly()
+    {
+        When.A<Bam.Blobs.FileBlob>("reads a whole chunk and a partial tail chunk",
+            () =>
+            {
+                string path = Path.Combine(Path.GetTempPath(), $"fileblob-{Guid.NewGuid():N}.bin");
+                byte[] content = new byte[25];
+                for (int i = 0; i < content.Length; i++)
+                {
+                    content[i] = (byte)(i + 1);
+                }
+                File.WriteAllBytes(path, content);
+                return new Bam.Blobs.FileBlob(new FileInfo(path), 10);
+            },
+            (blob) =>
+            {
+                byte[] whole = blob.ReadChunk(1, out long wholeIndex);
+                byte[] tail = blob.ReadChunk(2, out long tailIndex);
+                return new ChunkReadOutcome(whole, wholeIndex, tail, tailIndex);
+            })
+        .TheTest
+        .ShouldPass<ChunkReadOutcome>((because, _, outcome) =>
+        {
+            because.ItsTrue("the whole chunk starts at byte 10", outcome.WholeIndex == 10);
+            because.ItsTrue("the whole chunk holds bytes 11 to 20", outcome.Whole.SequenceEqual(Enumerable.Range(11, 10).Select(i => (byte)i)));
+            because.ItsTrue("the tail chunk starts at byte 20", outcome.TailIndex == 20);
+            because.ItsTrue("the tail chunk holds bytes 21 to 25", outcome.Tail.SequenceEqual(Enumerable.Range(21, 5).Select(i => (byte)i)));
+        })
+        .SoBeHappy()
+        .UnlessItFailed();
+    }
+
+    [UnitTest]
+    public void ThrowRatherThanPadWhenTheFileShrinks()
+    {
+        When.A<Bam.Blobs.FileBlob>("reads a chunk from a file truncated after the blob was sized",
+            () =>
+            {
+                string path = Path.Combine(Path.GetTempPath(), $"fileblob-{Guid.NewGuid():N}.bin");
+                File.WriteAllBytes(path, new byte[20]);
+                Bam.Blobs.FileBlob blob = new Bam.Blobs.FileBlob(new FileInfo(path), 10);
+                File.WriteAllBytes(path, new byte[15]);
+                return blob;
+            },
+            (blob) =>
+            {
+                try
+                {
+                    blob.ReadChunk(1, out long _);
+                    return false;
+                }
+                catch (EndOfStreamException)
+                {
+                    return true;
+                }
+            })
+        .TheTest
+        .ShouldPass<bool>((because, _, threw) =>
+        {
+            because.ItsTrue("a short read throws EndOfStreamException instead of returning zero padding", threw);
+        })
+        .SoBeHappy()
+        .UnlessItFailed();
+    }
+
+    private sealed record ChunkReadOutcome(byte[] Whole, long WholeIndex, byte[] Tail, long TailIndex);
 }

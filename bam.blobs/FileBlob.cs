@@ -134,7 +134,7 @@ namespace Bam.Blobs
             using (FileStream fs = new FileStream(File.FullName, FileMode.Open, FileAccess.Read))
             {
                 fs.Seek(streamIndex, SeekOrigin.Begin);
-                fs.Read(buffer, 0, ChunkSize);
+                fs.ReadExactly(buffer, 0, ChunkSize);
             }
 
             return buffer;
@@ -147,7 +147,7 @@ namespace Bam.Blobs
             using (FileStream fs = new FileStream(File.FullName, FileMode.Open, FileAccess.Read))
             {
                 fs.Seek(TailStreamIndex, SeekOrigin.Begin);
-                fs.Read(buffer, 0, (int)TailSize);
+                fs.ReadExactly(buffer, 0, (int)TailSize);
             }
             return buffer;            
         }

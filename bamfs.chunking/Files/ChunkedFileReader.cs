@@ -158,7 +158,7 @@ namespace Bam.Chunking
             using (FileStream fs = new FileStream(File.FullName, FileMode.Open, FileAccess.Read))
             {
                 fs.Seek(streamIndex, SeekOrigin.Begin);
-                fs.Read(buffer, 0, ChunkLength);
+                fs.ReadExactly(buffer, 0, ChunkLength);
             }
 
             return buffer;
@@ -171,7 +171,7 @@ namespace Bam.Chunking
             using (FileStream fs = new FileStream(File.FullName, FileMode.Open, FileAccess.Read))
             {
                 fs.Seek(TailStreamIndex, SeekOrigin.Begin);
-                fs.Read(buffer, 0, (int)TailLength);
+                fs.ReadExactly(buffer, 0, (int)TailLength);
             }
             return buffer;            
         }
