@@ -98,30 +98,20 @@ public class FileBlobShould : UnitTestMenuContainer
         string path = Path.Combine(Path.GetTempPath(), $"fileblob-{Guid.NewGuid():N}.bin");
         try
         {
-            When.A<Bam.Blobs.FileBlob>("reads a chunk from a file truncated after the blob was sized",
+            When.A<Bam.Blobs.FileBlob>("reads chunks from a file truncated after the blob was sized",
                 () =>
                 {
-                    File.WriteAllBytes(path, new byte[20]);
+                    File.WriteAllBytes(path, new byte[25]);
                     Bam.Blobs.FileBlob blob = new Bam.Blobs.FileBlob(new FileInfo(path), 10);
                     File.WriteAllBytes(path, new byte[15]);
                     return blob;
                 },
-                (blob) =>
-                {
-                    try
-                    {
-                        blob.ReadChunk(1, out long _);
-                        return false;
-                    }
-                    catch (EndOfStreamException)
-                    {
-                        return true;
-                    }
-                })
+                (blob) => new TruncationOutcome(ThrowsEndOfStream(() => blob.ReadChunk(1, out long _)), ThrowsEndOfStream(() => blob.ReadChunk(2, out long _))))
             .TheTest
-            .ShouldPass<bool>((because, _, threw) =>
+            .ShouldPass<TruncationOutcome>((because, _, outcome) =>
             {
-                because.ItsTrue("a short read throws EndOfStreamException instead of returning zero padding", threw);
+                because.ItsTrue("a short whole-chunk read throws EndOfStreamException instead of returning zero padding", outcome.WholeChunkThrew);
+                because.ItsTrue("a short tail-chunk read throws EndOfStreamException instead of returning zero padding", outcome.TailChunkThrew);
             })
             .SoBeHappy()
             .UnlessItFailed();
@@ -132,5 +122,20 @@ public class FileBlobShould : UnitTestMenuContainer
         }
     }
 
+    private static bool ThrowsEndOfStream(Action read)
+    {
+        try
+        {
+            read();
+            return false;
+        }
+        catch (EndOfStreamException)
+        {
+            return true;
+        }
+    }
+
     private sealed record ChunkReadOutcome(byte[] Whole, long WholeIndex, byte[] Tail, long TailIndex);
+
+    private sealed record TruncationOutcome(bool WholeChunkThrew, bool TailChunkThrew);
 }
