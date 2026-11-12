@@ -23,6 +23,7 @@
       <ProjectReference Include="$(BamFrameworkRoot)bam.data\bam.data\bam.data.csproj" />
       <ProjectReference Include="$(BamFrameworkRoot)bam.test\bam.test\bam.test.csproj" />
       <ProjectReference Include="..\bam.blobs\bam.blobs.csproj" />
+      <ProjectReference Include="..\bamfs.chunking\bamfs.chunking.csproj" />
     </ItemGroup>
 
     <ItemGroup>
